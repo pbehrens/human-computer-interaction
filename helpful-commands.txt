@@ -1,0 +1,32 @@
+To start off make sure you have git, python, easy_install, virtualenv and pip working properly on your machine
+
+Clone and move to the git repo with the following
+
+git clone git@github.com:pbehrens/human-computer-interaction.git
+cd ./human-computer-interaction
+
+Now you h ave to set up the virtual python environment.
+
+Run this from the human-computer-interaction directory to create a virtual python installation with no packages installed.
+
+virtualenv --no-site-packages ./venv
+
+To enter the virtual environment
+
+source ./venv/bin/activate
+
+Your command prompt should have (venv) in front of it now. To make sure if everything went well run these commands
+
+which python
+which pip
+which easy_install
+
+They should each show a path to ..../human-computer-interaction/venv/bin/(what ever command). This means that you are using the virtual version of python instead of the default one. Every time you work on the project you will have to run the activation command.
+
+To make sure your install has the correct packages installed you will have to use pip. There is a pip-requirements.txt  file that lists all of the packages that are required. To get your copy up to date run 
+
+pip install -r pip-requirements.txt
+
+
+
+
