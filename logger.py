@@ -12,21 +12,33 @@ from threading import Thread # This is the right package name
 import threading
 import ctypes
 from utils import Utility
+import csv
+import codecs
+import string
 
 class Logger(object):
     "Class for logging tweet data"
-    def __init__(self, logFileName="default"):
-        self.logFileName = logFileName
-        self.fileHandler = open(self.logFileName, 'w')
-        self.fileHandler.write("time,type,message")
-        self.fileHandler.close()
+    def __init__(self, messageFileName="default"):
+        self.messageFileName = messageFileName
+        self.messageLogger = csv.writer(open( self.messageFileName, 'wb'))
+        self.messageLogger.writerow(["time", "code", ""])
+
+        self.tweetLogger = csv.writer(open("tweets.csv", 'wb'))
+    
         self.util = Utility()
         self.time = self.util.currentTimeSeconds()
         
-    def log(self, code, message):
+    def logMessage(self, code, message):
         self.time = self.util.currentTimeMillis()
+        self.messageLogger.writerow([self.time, code, message])
         print(str(self.time) + "," + str(code) + "," + 
               str(message) + "\n")
-        self.fileHandler = open(self.logFileName, 'a')
-        self.fileHandler.write(str(self.time) + "," + str(code) + "," + str(message) + "\n")
-        self.fileHandler.close()
+        
+    def logTweet(self, tweet):
+        self.time = self.util.currentTimeMillis()
+        
+        # strip out weird chracters preventing the csv to be written
+        tweetText = tweet.text
+        cleanText = filter(lambda x: x in string.printable, tweetText)
+        
+        self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])

@@ -23,9 +23,11 @@ class OutputController(object):
             self.log.log("output error", color + " could not be printed out")
             return ""
         
-        
-        
     def getCurrentColor(self):
-        self.log.log("check", self.color)
-        print("current color is " + self.color)
-        return self.color
+        if (self.color == ""):
+            self.log.log("color error", "no color set")
+            return ""
+        else:
+            self.log.log("check", self.color)
+            print("current color is " + self.color)
+            return self.color

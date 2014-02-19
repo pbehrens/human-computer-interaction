@@ -7,8 +7,5 @@ class TweetProcessor(self):
     def __init__(self):
         
         
-    def startDoseThread():
-        
-        
-    def checkDoseState
+    def readTweet(self, tweet):
         

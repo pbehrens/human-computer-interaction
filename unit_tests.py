@@ -1,6 +1,6 @@
 import unittest
 import twitter
-import muchoauth
+import twitteroauth
 import sys
 from outputcontroller import OutputController
 
