@@ -2,3 +2,5 @@ venv/*
 *.pyc
 default
 settings.py
+env/*
+*.DS_Store

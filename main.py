@@ -7,7 +7,7 @@ logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 
 
-results = api.GetSearch("CTA", lang="en")
+results = api.GetSearch("Chicago", lang="en")
 
 
     
@@ -15,8 +15,9 @@ for result in results:
     logger.logTweet(result)
     tweet = Tweet(result.text)
     tweet.readTweet()
-
     
+logger.readTweetLogs()
+
     
     
     

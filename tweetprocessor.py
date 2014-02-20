@@ -6,7 +6,7 @@ class TweetProcessor(self):
     
     def __init__(self):
         
-        
+    def readTweetLogs(self, log)    
     def readTweet(self, tweet):
         
         
