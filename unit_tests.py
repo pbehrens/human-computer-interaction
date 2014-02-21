@@ -3,6 +3,7 @@ import twitter
 import twitteroauth
 import sys
 from outputcontroller import OutputController
+from worddictionary import WordDictionary
 
 class TestMuchOAuthenticator(unittest.TestCase):
     api = None
@@ -33,7 +34,14 @@ class TestMuchOAuthenticator(unittest.TestCase):
         
         currentColor = outControl.getCurrentColor()
         self.assertEqual(currentColor, "red")
-        
+
+    def test_wordDictionary(self):
+        wordDict = WordDictionary()
+        self.assertTrue(len(wordDict.getHappy()) > 0)
+        self.assertTrue(len(wordDict.getSad()) > 0)
+        self.assertTrue(len(wordDict.getAngry()) > 0)
+        self.assertTrue(len(wordDict.getProfane()) > 0)
+
 
 if __name__ == '__main__':
 	unittest.main()
