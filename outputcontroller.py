@@ -16,18 +16,18 @@ class OutputController(object):
     def outputColor(self, color):
         if color in self.colors:
             self.color = color
-            self.log.log("output", color)
+            self.log.logMessage("output", color)
             print(color)
             return self.color
         else:
-            self.log.log("output error", color + " could not be printed out")
+            self.log.logMessage("output error", color + " could not be printed out")
             return ""
         
     def getCurrentColor(self):
         if (self.color == ""):
-            self.log.log("color error", "no color set")
+            self.log.logMessage("color error", "no color set")
             return ""
         else:
-            self.log.log("check", self.color)
+            self.log.logMessage("check", self.color)
             print("current color is " + self.color)
             return self.color

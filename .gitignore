@@ -4,3 +4,4 @@ default
 settings.py
 env/*
 *.DS_Store
+*~

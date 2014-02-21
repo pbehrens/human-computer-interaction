@@ -8,7 +8,7 @@ class TestMuchOAuthenticator(unittest.TestCase):
     api = None
     def setUp(self):
         try:
-            self.api = muchoauth.getAuthenticatedApi()
+            self.api = twitteroauth.getAuthenticatedApi()
         except twitter.TwitterError,e:
 			print "Error:", str(e)
 			self.fail("getAuthenticatedApi() failed!")
