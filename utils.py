@@ -10,7 +10,7 @@ import random
 import time
 import datetime
 import threading
-import termios, sys, os
+import sys, os
 
 class Utility(object):
 
