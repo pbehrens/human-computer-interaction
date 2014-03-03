@@ -1,6 +1,7 @@
 from moodywords import *
 from worddictionary import WordDictionary
 from logger import Logger
+import sys
 
 class Tweet(object):
     "An object to hold some info about a tweet. Like if it is happy :) or if it is sad :( or if it is neither :|"
@@ -14,14 +15,14 @@ class Tweet(object):
         self.happyEmoticonCount = 0
         self.angryEmoticonCount = 0 
         self.sadEmoticonCount = 0
-        self.tweet = tweetObject.text
+        self.tweet = self.tweetObject
         self.dictionary = WordDictionary()
         self.checked = False
         self.logger = Logger()
     
     
     def readTweet(self):
-        self.checkEmoticons()
+        #TODO self.checkEmoticons()
         self.checkWords()
         self.printOut()
         
@@ -54,7 +55,8 @@ class Tweet(object):
         logger.logMood(self.getEmotionArray())
 
     def printOut(self):
-        print self.tweet
+    	tweetEncode = self.tweet.encode('utf-8')
+        print tweetEncode
         print "Happy words  " + str(self.happyWordCount)
         print "angry words " + str(self.angryWordCount)
         print "sad words " + str(self.sadWordCount)

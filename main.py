@@ -16,7 +16,7 @@ for result in results:
     tweet = Tweet(result.text)
     tweet.readTweet()
     
-logger.readTweetLogs()
+#TODO logger.readTweetLogs()
 
     
     
