@@ -61,7 +61,7 @@ SAD_WORDS = ["terrorist", "suicide", "rape", "terrorism", "murder", "cancer",
  "stroke"]
 
 ANGRY_WORDS = ["rage", "enraged", "war", "murderer", "mutilate", "nightmare",
- "stress", "hate", "terrified", "shark", "mad", "danger", "assault", "betray",
+	"stress", "hate", "terrified", "shark", "mad", "danger", "assault", "betray",
  "gun", "killer", "crash", "revolt", "slaughter", "fight", "scalding", "scared",
  "cancer", "hostile", "terrorist", "anger", "snake", "bees", "obsession", "fear",
  "bomb", "anxious", "drown", "scream", "abuse", "rejected", "hurricane", "afraid",
@@ -95,3 +95,13 @@ ANGRY_WORDS = ["rage", "enraged", "war", "murderer", "mutilate", "nightmare",
     "outraged", "piqued", "provoked", "raging", "resentful", "riled", "sore",
     "splenetic", "storming", "sulky", "sullen", "turbulent", "uptight",
     "vexed", "wrathful"]
+	
+PROFANE_WORDS = ["anal", "anus", "arse", "ass", "asshole", "assclown", "ballsack",
+ "balls", "bastard", "bitch", "biatch", "bloody", "blowjob", "bollock", "bollok",
+ "boner", "boob", "bugger", "buttfuck", "buttplug", "clitoris", "cock", "cocksucker",
+ "coon", "crap", "cunt", "damn", "dammit", "dick", "dildo", "dyke", "fag", "faggot",
+ "feck", "fellate", "fellatio", "felching", "fuck", "fucker", "fuckhead", "fudgepacker",
+ "flange", "fml", "goddamn", "hell", "homo", "jerk", "jizz", "knobend", "labia", "lmao",
+ "lmfao", "muff", "nigger", "nigga", "omg", "penis", "piss", "poop", "prick", "pube",
+ "pussy", "queer", "scrotum", "sex", "shit", "shitlord", "sh1t", "slut", "smegma",
+ "spunk", "tit", "tosser", "turd", "twat", "vagina", "wank", "whore", "wtf"]
