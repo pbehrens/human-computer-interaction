@@ -5,3 +5,5 @@ settings.py
 env/*
 *.DS_Store
 *~
+*.swp
+tweets.csv

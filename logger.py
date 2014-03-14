@@ -23,7 +23,7 @@ class Logger(object):
         self.messageLogger = csv.writer(open( self.messageFileName, 'wb'))
         self.messageLogger.writerow(["time", "code", ""])
 
-        self.tweetLogger = csv.writer(open("tweets.csv", 'wb'))
+        self.tweetLogger = csv.writer(open("tweets.csv", 'a'))
     
         self.util = Utility()
         self.time = self.util.currentTimeSeconds()

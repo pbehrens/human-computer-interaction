@@ -17,10 +17,3 @@ for result in results:
     tweet.readTweet()
     
 #TODO logger.readTweetLogs()
-
-    
-    
-    
-
-    
-    

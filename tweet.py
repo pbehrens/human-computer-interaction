@@ -27,7 +27,7 @@ class Tweet(object):
         self.printOut()
         
     def checkWords(self):
-        if(self.checked is True):
+        if(self.checked is False):
             self.checked = True    
             for word in self.dictionary.happyWords:
                 if word in self.tweet: 

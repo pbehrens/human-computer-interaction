@@ -1,0 +1,126 @@
+diff --git a/.gitignore b/.gitignore
+index a64feb2..3e52e43 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -5,3 +5,5 @@ settings.py
+ env/*
+ *.DS_Store
+ *~
++*.swp
++tweets.csv
+diff --git a/gui.py b/gui.py
+index 7d564be..bf4a6c6 100644
+--- a/gui.py
++++ b/gui.py
+@@ -13,6 +13,7 @@ class Gui(tk.Frame):
+ 
+     def __init__(self, master=None):
+         tk.Frame.__init__(self, master)
++        self.master.title('Much Twitter')
+         self.color = 'white'
+         #TODO do we need grid? self.grid(column=0, row=0, ipadx=100, ipady=100, sticky=('N','W','E','S'))
+         self.configure(background=self.color)
+@@ -30,7 +31,8 @@ class Gui(tk.Frame):
+ 
+     def setColor(self, color):
+         self.color = color
++        self.configure(background=self.color)
+ 
+-app = Gui()
+-app.master.title('Much Twitter')
+-app.mainloop()      
++""" Example execution """
++#app = Gui()
++#app.mainloop()      
+diff --git a/logger.py b/logger.py
+index d1d4b15..acdfa9e 100755
+--- a/logger.py
++++ b/logger.py
+@@ -23,7 +23,7 @@ class Logger(object):
+         self.messageLogger = csv.writer(open( self.messageFileName, 'wb'))
+         self.messageLogger.writerow(["time", "code", ""])
+ 
+-        self.tweetLogger = csv.writer(open("tweets.csv", 'wb'))
++        self.tweetLogger = csv.writer(open("tweets.csv", 'a'))
+     
+         self.util = Utility()
+         self.time = self.util.currentTimeSeconds()
+@@ -41,4 +41,4 @@ class Logger(object):
+         tweetText = tweet.text
+         cleanText = filter(lambda x: x in string.printable, tweetText)
+         
+-        self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
+\ No newline at end of file
++        self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
+diff --git a/main.py b/main.py
+index 6b1a74c..7092b52 100644
+--- a/main.py
++++ b/main.py
+@@ -17,10 +17,3 @@ for result in results:
+     tweet.readTweet()
+     
+ #TODO logger.readTweetLogs()
+-
+-    
+-    
+-    
+-
+-    
+-    
+diff --git a/tweet.py b/tweet.py
+index ddd86cc..1284ca7 100644
+--- a/tweet.py
++++ b/tweet.py
+@@ -27,7 +27,7 @@ class Tweet(object):
+         self.printOut()
+         
+     def checkWords(self):
+-        if(self.checked is True):
++        if(self.checked is False):
+             self.checked = True    
+             for word in self.dictionary.happyWords:
+                 if word in self.tweet: 
+diff --git a/unit_tests.py b/unit_tests.py
+index 4349135..a3da2f7 100644
+--- a/unit_tests.py
++++ b/unit_tests.py
+@@ -4,19 +4,26 @@ import twitteroauth
+ import sys
+ from outputcontroller import OutputController
+ from worddictionary import WordDictionary
++from gui import Gui
+ 
+ class TestMuchOAuthenticator(unittest.TestCase):
++
+     api = None
++    gui = None
++
+     def setUp(self):
+         try:
+-            self.api = twitteroauth.getAuthenticatedApi()
++            #TODO Uncomment to test Twitter oAuth
++            #self.api = twitteroauth.getAuthenticatedApi()
++            self.gui = Gui()
+         except twitter.TwitterError,e:
+ 			print "Error:", str(e)
+ 			self.fail("getAuthenticatedApi() failed!")
+ 	
+ 	def test_verifyApi(self):
+ 		try:
+-			verification = self.api.VerifyCredentials()
++            #TODO Uncomment to test Twitter credentials
++			#verification = self.api.VerifyCredentials()
+ 			print verification
+ 		except twitter.TwitterError,e:
+ 			print "Error:", str(e)
+@@ -42,6 +49,10 @@ class TestMuchOAuthenticator(unittest.TestCase):
+         self.assertTrue(len(wordDict.getAngry()) > 0)
+         self.assertTrue(len(wordDict.getProfane()) > 0)
+ 
++    def test_gui(self):
++        self.assertEqual(self.gui.color, 'white')
++        self.gui.setColor('red')
++        self.assertEqual(self.gui.color, 'red')
+ 
+ if __name__ == '__main__':
+ 	unittest.main()

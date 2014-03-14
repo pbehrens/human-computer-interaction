@@ -4,19 +4,26 @@ import twitteroauth
 import sys
 from outputcontroller import OutputController
 from worddictionary import WordDictionary
+from gui import Gui
 
 class TestMuchOAuthenticator(unittest.TestCase):
+
     api = None
+    gui = None
+
     def setUp(self):
         try:
-            self.api = twitteroauth.getAuthenticatedApi()
+            #TODO Uncomment to test Twitter oAuth
+            #self.api = twitteroauth.getAuthenticatedApi()
+            self.gui = Gui()
         except twitter.TwitterError,e:
 			print "Error:", str(e)
 			self.fail("getAuthenticatedApi() failed!")
 	
 	def test_verifyApi(self):
 		try:
-			verification = self.api.VerifyCredentials()
+            #TODO Uncomment to test Twitter credentials
+			#verification = self.api.VerifyCredentials()
 			print verification
 		except twitter.TwitterError,e:
 			print "Error:", str(e)
@@ -42,6 +49,10 @@ class TestMuchOAuthenticator(unittest.TestCase):
         self.assertTrue(len(wordDict.getAngry()) > 0)
         self.assertTrue(len(wordDict.getProfane()) > 0)
 
+    def test_gui(self):
+        self.assertEqual(self.gui.color, 'white')
+        self.gui.setColor('red')
+        self.assertEqual(self.gui.color, 'red')
 
 if __name__ == '__main__':
 	unittest.main()

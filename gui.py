@@ -13,6 +13,7 @@ class Gui(tk.Frame):
 
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
+        self.master.title('Much Twitter')
         self.color = 'white'
         #TODO do we need grid? self.grid(column=0, row=0, ipadx=100, ipady=100, sticky=('N','W','E','S'))
         self.configure(background=self.color)
@@ -30,7 +31,8 @@ class Gui(tk.Frame):
 
     def setColor(self, color):
         self.color = color
+        self.configure(background=self.color)
 
-app = Gui()
-app.master.title('Much Twitter')
-app.mainloop()      
+""" Example execution """
+#app = Gui()
+#app.mainloop()      
