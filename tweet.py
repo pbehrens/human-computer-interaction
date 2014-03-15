@@ -2,6 +2,7 @@ from moodywords import *
 from worddictionary import WordDictionary
 from logger import Logger
 import sys
+import re
 
 class Tweet(object):
     "An object to hold some info about a tweet. Like if it is happy :) or if it is sad :( or if it is neither :|"
@@ -25,21 +26,21 @@ class Tweet(object):
         #TODO self.checkEmoticons()
         self.checkWords()
         self.printOut()
-        
+
     def checkWords(self):
         if(self.checked is False):
-            self.checked = True    
+            self.checked = True
             for word in self.dictionary.happyWords:
-                if word in self.tweet: 
+                if re.search(r'\b({0})\b'.format(word), self.tweet, flags=re.IGNORECASE):
                    self.happyWordCount += 1
             for word in self.dictionary.sadWords:
-                if word in self.tweet: 
+                if re.search(r'\b({0})\b'.format(word), self.tweet, flags=re.IGNORECASE):
                    self.sadWordCount += 1
             for word in self.dictionary.angryWords:
-                if word in self.tweet: 
+                if re.search(r'\b({0})\b'.format(word), self.tweet, flags=re.IGNORECASE):
                    self.angryWordCount += 1
             for word in self.dictionary.profaneWords:
-                if word in self.tweet: 
+                if re.search(r'\b({0})\b'.format(word), self.tweet, flags=re.IGNORECASE):
                    self.profaneWordCount += 1
                
     def getEmotionArray(self):
@@ -62,7 +63,7 @@ class Tweet(object):
         print "sad words " + str(self.sadWordCount)
         print "profane words " + str(self.profaneWordCount)
         
-        
+
         
         
 
