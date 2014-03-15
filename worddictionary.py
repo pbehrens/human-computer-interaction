@@ -20,4 +20,3 @@ class WordDictionary(object):
         
     def getProfane(self):
         return self.profaneWords
-    
