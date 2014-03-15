@@ -40,5 +40,7 @@ class Logger(object):
         # strip out weird chracters preventing the csv to be written
         tweetText = tweet.text
         cleanText = filter(lambda x: x in string.printable, tweetText)
+        exclude = set([',', ';'])
+        cleanText = ''.join(ch for ch in cleanText if ch not in exclude)
         
         self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
