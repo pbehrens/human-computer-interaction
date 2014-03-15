@@ -1,8 +1,8 @@
 
 # rename this file to settings.py and include the private data needed for twitter
-API_KEY = 'rLhawpdynNifi9JYgNbjw'
+API_KEY = ''
 API_SECRET = ''
-ACCESS_TOKEN = '1001277594-3LGhvXZyvcbMTYrolRHgBejCdzBNtx5bipkmsVH'
+ACCESS_TOKEN = ''
 ACCESS_SECRET = ''
 DICTIONARY_DIR = 'dictionaries'
 HAPPY_WORDS = 'happywords.txt'

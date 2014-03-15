@@ -1,7 +1,7 @@
 from settings import *
 
 class WordDictionary(object):
-    "Make all the dicitonaries avaible in array form"
+    "Make all the dictionaries available in array form"
     
     def __init__(self):
         self.happyWords = [line.strip() for line in open(DICTIONARY_DIR + '/' + HAPPY_WORDS)]
