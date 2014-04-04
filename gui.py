@@ -8,12 +8,14 @@ A simple GUI that can display colors
 """
 
 import Tkinter as tk
+import sys
 
 class Gui(tk.Frame):
 
-    def __init__(self, master=None):
+    def __init__(self, quitCallback, master=None):
         tk.Frame.__init__(self, master)
         self.master.title('Much Twitter')
+        self.quitCallback = quitCallback
         self.color = 'white'
         #TODO do we need grid? self.grid(column=0, row=0, ipadx=100, ipady=100, sticky=('N','W','E','S'))
         self.configure(background=self.color)
@@ -22,12 +24,13 @@ class Gui(tk.Frame):
         self.pack(fill="both", expand=True, ipadx=100, ipady=100)
         self.createWidgets()
         
-    def createWidgets(self):
-        self.quitButton = tk.Button(self, text='Quit', command=self.quit)
-        self.quitButton.grid()
-
     def stopGui(self):
-        self.quit
+        self.destroy()
+        sys.exit(0)
+
+    def createWidgets(self):
+        self.quitButton = tk.Button(self, text='Quit', command=self.quitCallback)
+        self.quitButton.grid()
 
     def setColor(self, color):
         self.color = color

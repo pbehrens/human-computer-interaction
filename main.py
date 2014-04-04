@@ -11,7 +11,9 @@ from threading import Thread
 logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
-gui = Gui()
+gui = None
+thread = None
+timer = None
 
 def searchEvent():
     results = api.GetSearch("Chicago", lang="en")
@@ -39,15 +41,23 @@ def countAndColor():
     elif (highest == 'profane'):
         gui.setColor('orange')
     # Do process again after 15 sec
-    Timer(15, searchEvent).start()
+    timer.start()
 
 def startAppThread():
     thread = Thread(target = searchEvent())
     thread.start()
     thread.join()
 
+def quitCallback():
+    print "quitCallback"
+    timer.cancel()
+    gui.stopGui()
+    if(thread != None):
+        thread.exit()
+
 if __name__ == '__main__':
 
-    gui.after(15000, startAppThread)
+    timer = Timer(15, searchEvent)
+    gui = Gui(quitCallback)
+    _job = gui.after(15000, startAppThread)
     gui.mainloop()
-    #TODO logger.readTweetLogs()
