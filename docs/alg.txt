@@ -1,0 +1,45 @@
+/** NEW objects (not variables in this code)
+Object "Word/Term"          // stores its TF, IDF, name of the word, and weight values
+Object Document             // stores the Tweets (perhaps we should combine the results?), Dictionary of <string word, count>, count being
+                            // the total # of emo words found in it
+**/
+int MAX_WINDOW = 10             // max number of documents we want to keep over time
+
+List<string> words              // list of words we want to weigh (combines all emotion words)
+List<Word> realWords            // list of object words (see above); mirrors size and names of words (string) list
+Deque<Document> documents       // queue of documents that will be push/popped according to sliding window
+
+List results = get query of tweets
+Add new Document to documents containing Tweet results
+
+:::ALGORITHM
+
+// Call this function for each word in words
+
+// TODO this is a stale representation of the algorithm!!!!!!!!!!!
+// TO CALCULATE TF/IDF for a word
+// This function would need to be passed the word and the new document previously added
+def calcTfIdf(word, document):
+    double TF = 0
+    double IDF = 0
+    // Cycle through each document and each word, counting to calc TF
+    For Each doc in documents:
+        string combinedTweets = documents.getAllTweets()
+        // # of all words in doc
+        int allWordCount = combinedTweets.split()
+        a = re.split(r'\W', combinedTweets)
+        int counts = a.count(word)          // # of times we found word in document
+        // calc TF
+        TF = counts / allWordCount
+        // Add or increment the word inside of the dicitonary object
+        doc.addIncrementWord(word, counts)
+    // Calc IDF now since we have total # docs and total # docs w/ word 'x' in it
+    int wordCount = 0;
+    For Each doc in documents:
+        if(doc.hasWord(word)):
+            ++ wordCount
+    IDF = len(documents) / wordCount
+    // CALC FINAL RESULT
+    weight = (TF * IDF)
+    // Store off Real Word
+    realWords.add(new Word(TF, IDF, word, weight))

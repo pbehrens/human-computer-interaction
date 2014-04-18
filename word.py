@@ -5,7 +5,7 @@ class Word(object):
         self.name = name
         self.TF = 0.0
         self.IDF = 0.0
-    
+
     def getName(self):
         return self.name
 

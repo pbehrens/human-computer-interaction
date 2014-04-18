@@ -7,6 +7,7 @@ from worddictionary import WordDictionary
 from gui import Gui
 from word import Word
 from document import Document
+from doc_words import DocWords
 
 # Place holder function for gui init
 def placeHolder():
@@ -23,28 +24,28 @@ class TestMuchOAuthenticator(unittest.TestCase):
             #self.api = twitteroauth.getAuthenticatedApi()
             self.gui = Gui(placeHolder)
         except twitter.TwitterError,e:
-			print "Error:", str(e)
-			self.fail("getAuthenticatedApi() failed!")
-	
-	def test_verifyApi(self):
-		try:
+            print "Error:", str(e)
+            self.fail("getAuthenticatedApi() failed!")
+
+    def test_verifyApi(self):
+        try:
             #TODO Uncomment to test Twitter credentials
-			#verification = self.api.VerifyCredentials()
-			print verification
-		except twitter.TwitterError,e:
-			print "Error:", str(e)
-			self.fail("Could not authenticate api!")
-    
+            #verification = self.api.VerifyCredentials()
+            #print verification
+            print "nothing"
+        except twitter.TwitterError,e:
+            print "Error:", str(e)
+            self.fail("Could not authenticate api!")
+
     def test_verifyColorOutput(self):
         outControl = OutputController()
         outputedColor = outControl.outputColor("red")
         self.assertEqual(outputedColor, "red")
-    
+
     def test_getCurrentColor(self):
         outControl = OutputController()
         outputedColor = outControl.outputColor("red")
         self.assertEqual(outputedColor, "red")
-        
         currentColor = outControl.getCurrentColor()
         self.assertEqual(currentColor, "red")
 
@@ -71,8 +72,24 @@ class TestMuchOAuthenticator(unittest.TestCase):
     def test_document(self):
         doc = Document("hello my name is")
         self.assertEqual(doc.getDocString(), "hello my name is")
-        doc.addIncrementWord("hello", 5)
+        doc.addIncWord("hello", 5)
         self.assertEqual(doc.getWordDict().get("hello"), 5)
+        doc.addIncWord("hello", 5)
+        self.assertEqual(doc.getWordDict().get("hello"), 10)
+        doc.addIncWord("test", 99)
+        self.assertEqual(len(doc.getWordDict()), 2)
+        self.assertEqual(doc.getWordDict().get("test"), 99)
+        self.assertTrue(doc.hasWord("test"))
+
+    def test_docWords(self):
+        docWords = DocWords(3)
+        doc1 = Document("hello my hello name is what what")
+        doc2 = Document("test test nice nice okay")
+        #docWords.addDoc(doc1)
+        #docWords.addDoc(doc2)
+        TfIdf = docWords.calcTfIdf("hello", doc1)
+        print TfIdf
+        self.assertEqual(TfIdf, 0.29)
 
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()
