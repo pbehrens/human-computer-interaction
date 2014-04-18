@@ -62,11 +62,3 @@ class Tweet(object):
         print "angry words " + str(self.angryWordCount)
         print "sad words " + str(self.sadWordCount)
         print "profane words " + str(self.profaneWordCount)
-        
-
-        
-        
-
-
-        
-        

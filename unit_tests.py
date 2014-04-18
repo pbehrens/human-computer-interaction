@@ -5,6 +5,12 @@ import sys
 from outputcontroller import OutputController
 from worddictionary import WordDictionary
 from gui import Gui
+from word import Word
+from document import Document
+
+# Place holder function for gui init
+def placeHolder():
+    return 0
 
 class TestMuchOAuthenticator(unittest.TestCase):
 
@@ -15,7 +21,7 @@ class TestMuchOAuthenticator(unittest.TestCase):
         try:
             #TODO Uncomment to test Twitter oAuth
             #self.api = twitteroauth.getAuthenticatedApi()
-            self.gui = Gui()
+            self.gui = Gui(placeHolder)
         except twitter.TwitterError,e:
 			print "Error:", str(e)
 			self.fail("getAuthenticatedApi() failed!")
@@ -53,6 +59,20 @@ class TestMuchOAuthenticator(unittest.TestCase):
         self.assertEqual(self.gui.color, 'white')
         self.gui.setColor('red')
         self.assertEqual(self.gui.color, 'red')
+
+    def test_word(self):
+        word = Word("test")
+        self.assertEqual(word.getName(), "test")
+        word.setTF(0.4)
+        word.setIDF(0.6)
+        self.assertEqual(word.getTF(), 0.4)
+        self.assertEqual(word.getIDF(), 0.6)
+
+    def test_document(self):
+        doc = Document("hello my name is")
+        self.assertEqual(doc.getDocString(), "hello my name is")
+        doc.addIncrementWord("hello", 5)
+        self.assertEqual(doc.getWordDict().get("hello"), 5)
 
 if __name__ == '__main__':
 	unittest.main()
