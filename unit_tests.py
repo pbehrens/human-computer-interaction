@@ -85,11 +85,15 @@ class TestMuchOAuthenticator(unittest.TestCase):
         docWords = DocWords(3)
         doc1 = Document("hello my hello name is what what")
         doc2 = Document("test test nice nice okay")
-        #docWords.addDoc(doc1)
-        #docWords.addDoc(doc2)
-        TfIdf = docWords.calcTfIdf("hello", doc1)
-        print TfIdf
-        self.assertEqual(TfIdf, 0.29)
+        TfIdf1 = docWords.calcTfIdf("hello", doc1)
+        print TfIdf1
+        self.assertEqual(TfIdf1, 0.29)
+        self.assertEqual(len(docWords.getDocQueue()), 1)
+        TfIdf2 = docWords.calcTfIdf("nice", doc2)
+        print TfIdf2
+        self.assertEqual(TfIdf2, 0.8)
+        self.assertEqual(len(docWords.getDocQueue()), 2)
+        self.assertEqual(len(docWords.getWordList()), 2)
 
 if __name__ == '__main__':
     unittest.main()

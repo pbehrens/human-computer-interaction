@@ -17,16 +17,13 @@ class DocWords(object):
     def getWordList(self):
         return self.words
 
-    " Adds a document to the right side of the deque, pushing off the left if maxWindow is exceeded "
-    def addDoc(self, doc):
-        self.docs.append(doc)
-
     " Adds a word to our real words list "
     def addRealWord(self, word):
         self.words.append(word)
 
-    """ Calculates the TF of a word, adds the count of the word to the doc, and stores it in our deque.
-      It then uses the current deque state to calculate IDF, returning the weight """
+    # Calculates the TF of a word, adds the count of the word to the doc, and stores it in our deque.
+    # It then uses the current deque state to calculate IDF, returning the weight.
+    # Adds a document to the right side of the deque, pushing off the left if maxWindow is exceeded.
     def calcTfIdf(self, word, document):
         TF = 0.0
         IDF = 0.0
@@ -50,4 +47,9 @@ class DocWords(object):
         IDF = round(len(self.docs) / float(docsWithWord), PRECISION)
         print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
         # TODO
-        return TF * IDF
+        TfIdf = TF * IDF
+        realWord = Word(word)
+        realWord.setTF(TF)
+        realWord.setIDF(IDF)
+        self.words.append(realWord)
+        return TfIdf
