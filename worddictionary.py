@@ -20,3 +20,6 @@ class WordDictionary(object):
         
     def getProfane(self):
         return self.profaneWords
+
+    def getAll(self):
+        return self.happyWords + self.sadWords + self.angryWords + self.profaneWords

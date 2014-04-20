@@ -3,7 +3,7 @@ from word import Word
 from collections import deque
 import re
 
-PRECISION = 2
+PRECISION = 5
 
 class DocWords(object):
     """An object that stores a duque of Documents and list of Words and calculates the TF/IDF"""
@@ -17,14 +17,22 @@ class DocWords(object):
     def getWordList(self):
         return self.words
 
-    " Adds a word to our real words list "
+    " Adds a document to the right side of the deque, pushing off the left if maxWindow is exceeded. "
+    def addDoc(self, doc):
+        self.docs.append(doc)
+
+    " Adds a word to our real words list, replacing the old if it exists "
     def addRealWord(self, word):
-        self.words.append(word)
+        if(any(x.name == word.getName() for x in self.words)):
+            self.words = [x for x in self.words if x.name == word.getName()]
+            self.words.append(word)
+        else:
+            self.words.append(word)
 
     # Calculates the TF of a word, adds the count of the word to the doc, and stores it in our deque.
     # It then uses the current deque state to calculate IDF, returning the weight.
-    # Adds a document to the right side of the deque, pushing off the left if maxWindow is exceeded.
-    def calcTfIdf(self, word, document):
+    # Returns the document that should be added
+    def calcTfIdf(self, word, emotion, document):
         TF = 0.0
         IDF = 0.0
         # Use the document and find each word, counting to calc TF
@@ -34,22 +42,28 @@ class DocWords(object):
         thisWordCount = allWords.count(word)
         # Store the count in the document
         document.addIncWord(word, thisWordCount)
-        # Add the document to our deque
-        self.docs.append(document)
         # Calc the TF
         TF = round(thisWordCount / float(allWordCount), PRECISION)
         print 'TF CALC: {} / {} = {}'.format(thisWordCount, allWordCount, TF)
         # Calc the IDF
         docsWithWord = 0
+        if(thisWordCount > 0):
+            docsWithWord = 1
         for doc in self.docs:
             if(doc.hasWord(word)):
                 docsWithWord += 1
-        IDF = round(len(self.docs) / float(docsWithWord), PRECISION)
+        IDF = 0
+        if(docsWithWord == 0):
+            IDF = 0.0
+        else:
+            IDF = round((len(self.docs) + 1) / float(docsWithWord), PRECISION)
         print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
         # TODO
         TfIdf = TF * IDF
+        print 'WEIGHT: {}'.format(TfIdf)
         realWord = Word(word)
         realWord.setTF(TF)
         realWord.setIDF(IDF)
-        self.words.append(realWord)
-        return TfIdf
+        realWord.setEmo(emotion)
+        self.addRealWord(realWord)
+        return document

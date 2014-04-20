@@ -3,44 +3,24 @@ from logger import Logger
 from tweet import Tweet
 from tweetprocessor import TweetProcessor
 from gui import Gui
-from doc_words import DocWords
-from document import Document
-from worddictionary import WordDictionary
 import time
 
 logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
 gui = None
-docWords = DocWords(10)
-wordDict = WordDictionary()
+start_time = 0.0
 
 def searchEvent():
     results = api.GetSearch("Chicago", lang="en")
 
     start_time = time.time()
-    resultString = ""
     for result in results:
         logger.logTweet(result)
-        resultString+= ' ' + result.text
-        #tweet = Tweet(result.text)
-        #tweet.readTweet()
-        #tweetprocessor.processTweet(tweet)
-    print resultString
-    document = Document(resultString)
-    # Go through each word list
-    for word in wordDict.getHappy():
-        tfIdf = docWords.calcTfIdf(word, "happy", document)
-    for word in wordDict.getSad():
-        tfIdf = docWords.calcTfIdf(word, "sad", document)
-    for word in wordDict.getAngry():
-        tfIdf = docWords.calcTfIdf(word, "angry", document)
-    for word in wordDict.getProfane():
-        tfIdf = docWords.calcTfIdf(word, "profane", document)
-    tweetprocessor.processWeights(docWords.getWordList())
-    # Add the document to our deque
-    docWords.addDoc(document)
-    logger.logTiming("tfIdf", (time.time() - start_time))
+        tweet = Tweet(result.text)
+        tweet.readTweet()
+        tweetprocessor.processTweet(tweet)
+    logger.logTiming("legacy", (time.time() - start_time))
 
     countAndColor()
 
