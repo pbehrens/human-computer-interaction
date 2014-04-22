@@ -5,6 +5,7 @@ class Word(object):
         self.name = name
         self.TF = 0.0
         self.IDF = 0.0
+        self.Weight = 0.0
         self.emo = ""
 
     def getName(self):
@@ -17,7 +18,7 @@ class Word(object):
         return self.IDF
 
     def getWeight(self):
-        return (self.TF * self.IDF)
+        return self.Weight
 
     def getEmo(self):
         return self.emo
@@ -33,3 +34,6 @@ class Word(object):
 
     def setEmo(self, emo):
         self.emo = emo
+
+    def setWeight(self, weight):
+        self.Weight = weight

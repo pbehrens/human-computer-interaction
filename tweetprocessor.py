@@ -4,7 +4,7 @@ class TweetProcessor(object):
     
     def __init__(self):
         # Master sums
-        self.counts = {'happy': 0, 'angry': 0, 'sad': 0, 'profane': 0, 'happyEm': 0, 'angryEm': 0, 'sadEm': 0}
+        self.counts = {'happy': 0.0, 'angry': 0.0, 'sad': 0.0, 'profane': 0.0, 'happyEm': 0.0, 'angryEm': 0.0, 'sadEm': 0.0}
         
     #def readTweetLogs(self, log):
         #TODO
@@ -19,7 +19,8 @@ class TweetProcessor(object):
         self.counts['sadEm'] += tweet.sadEmoticonCount
 
     def processWeights(self, realWordList):
-        for rWord in realWordList:
+        for w, rWord in realWordList.iteritems():
+            print 'WORD WEIGHT AFTER: {}'.format(rWord.getWeight())
             if(rWord.getEmo() == "happy"):
                 self.counts['happy'] += rWord.getWeight()
             if(rWord.getEmo() == "angry"):

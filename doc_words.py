@@ -9,12 +9,12 @@ class DocWords(object):
     """An object that stores a duque of Documents and list of Words and calculates the TF/IDF"""
     def __init__(self, maxWindow):
         self.docs = deque('', maxWindow)
-        self.words = list()
+        self.words = dict()
 
     def getDocQueue(self):
         return self.docs
 
-    def getWordList(self):
+    def getWordDict(self):
         return self.words
 
     " Adds a document to the right side of the deque, pushing off the left if maxWindow is exceeded. "
@@ -23,11 +23,7 @@ class DocWords(object):
 
     " Adds a word to our real words list, replacing the old if it exists "
     def addRealWord(self, word):
-        if(any(x.name == word.getName() for x in self.words)):
-            self.words = [x for x in self.words if x.name == word.getName()]
-            self.words.append(word)
-        else:
-            self.words.append(word)
+        self.words[word.getName()] = word
 
     # Calculates the TF of a word, adds the count of the word to the doc, and stores it in our deque.
     # It then uses the current deque state to calculate IDF, returning the weight.
@@ -40,11 +36,14 @@ class DocWords(object):
         allWords = re.split(r'\W', docString)
         allWordCount = len(allWords)
         thisWordCount = allWords.count(word)
+        if(thisWordCount > 0):
+            print 'FOUND {} {} words'.format(thisWordCount, emotion)
         # Store the count in the document
         document.addIncWord(word, thisWordCount)
         # Calc the TF
         TF = round(thisWordCount / float(allWordCount), PRECISION)
-        print 'TF CALC: {} / {} = {}'.format(thisWordCount, allWordCount, TF)
+        if(thisWordCount > 0):
+            print 'TF CALC: {} / {} = {}'.format(thisWordCount, allWordCount, TF)
         # Calc the IDF
         docsWithWord = 0
         if(thisWordCount > 0):
@@ -57,13 +56,16 @@ class DocWords(object):
             IDF = 0.0
         else:
             IDF = round((len(self.docs) + 1) / float(docsWithWord), PRECISION)
-        print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
+        if(thisWordCount > 0):
+            print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
         # TODO
         TfIdf = TF * IDF
-        print 'WEIGHT: {}'.format(TfIdf)
+        if(thisWordCount > 0):
+            print 'WEIGHT: {}'.format(TfIdf)
         realWord = Word(word)
         realWord.setTF(TF)
         realWord.setIDF(IDF)
+        realWord.setWeight(TfIdf)
         realWord.setEmo(emotion)
         self.addRealWord(realWord)
         return document
