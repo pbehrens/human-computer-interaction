@@ -41,7 +41,7 @@ def searchEvent():
     # Add the document to our deque
     docWords.addDoc(document)
     tweetprocessor.processWeights(docWords)#wordList)
-    logger.logTiming("tfIdf", (time.time() - start_time))
+    logger.logTiming("tfIdf", (time.time() - start_time), tweetprocessor.calcHighest())
 
     countAndColor()
 

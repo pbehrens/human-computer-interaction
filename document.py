@@ -14,9 +14,6 @@ class Document(object):
     def getWordDict(self):
         return self.wordDict
 
-#    def addIncWord(self, word, count):
-#        self.wordDict[word] = self.wordDict.get(word, 0) + count
-
     " Adds a word to our word dict list, replacing the old if it exists "
     def addRealWord(self, word):
         self.wordDict[word.getName()] = word

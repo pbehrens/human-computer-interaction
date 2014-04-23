@@ -28,8 +28,8 @@ class Logger(object):
         self.util = Utility()
         self.time = self.util.currentTimeSeconds()
 
-        self.timeLogger = csv.writer(open("timing.csv", 'a'))
-        self.timeLogger.writerow(['impl', 'exeTIme'])
+        self.timeLogger = csv.writer(open("timing.csv", 'wb'))
+        self.timeLogger.writerow(['impl', 'execTime', 'highestEmo', 'currentTime'])
         
     def logMessage(self, code, message):
         self.time = self.util.currentTimeMillis()
@@ -48,5 +48,6 @@ class Logger(object):
         
         self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
 
-    def logTiming(self, qualifier, execTime):
-        self.timeLogger.writerow([qualifier, execTime])
+    def logTiming(self, qualifier, execTime, highestEmo):
+        self.time = self.util.currentTimeMillis()
+        self.timeLogger.writerow([qualifier, execTime, highestEmo, self.time])

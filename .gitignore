@@ -7,4 +7,4 @@ env/*
 *~
 *.swp
 tweets.csv
-timing.csv
+*.csv

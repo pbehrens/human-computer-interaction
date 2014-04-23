@@ -19,6 +19,7 @@ class TweetProcessor(object):
         self.counts['sadEm'] += tweet.sadEmoticonCount
 
     def processWeights(self, docWords):#realWordList):
+        self.clearCounts()
         for doc in docWords.getDocQueue():
             for w, rWord in doc.getWordDict().iteritems():
                 print 'WORD WEIGHT AFTER: {}'.format(rWord.getWeight())
@@ -34,3 +35,12 @@ class TweetProcessor(object):
     def calcHighest(self):
         highest = max(self.counts.iterkeys(), key=(lambda key: self.counts[key]))
         return highest
+
+    def clearCounts(self):
+        self.counts['happy'] = 0.0
+        self.counts['angry'] = 0.0
+        self.counts['sad'] = 0.0
+        self.counts['profane'] = 0.0
+        self.counts['happyEm'] = 0.0
+        self.counts['angryEm'] = 0.0
+        self.counts['sadEm'] = 0.0

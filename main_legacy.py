@@ -14,13 +14,15 @@ start_time = 0.0
 def searchEvent():
     results = api.GetSearch("Chicago", lang="en")
 
-    start_time = time.time()
+    # Log tweets outside of timer
     for result in results:
         logger.logTweet(result)
+    start_time = time.time()
+    for result in results:
         tweet = Tweet(result.text)
         tweet.readTweet()
         tweetprocessor.processTweet(tweet)
-    logger.logTiming("legacy", (time.time() - start_time))
+    logger.logTiming("legacy", (time.time() - start_time), tweetprocessor.calcHighest())
 
     countAndColor()
 

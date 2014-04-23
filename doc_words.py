@@ -51,7 +51,7 @@ class DocWords(object):
         if(thisWordCount > 0):
             print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
         # TODO
-        TfIdf = TF * IDF
+        TfIdf = round(TF * IDF, PRECISION)
         if(thisWordCount > 0):
             print 'WEIGHT: {}'.format(TfIdf)
         realWord = Word(word)
