@@ -70,15 +70,16 @@ class TestMuchOAuthenticator(unittest.TestCase):
         self.assertEqual(word.getIDF(), 0.6)
 
     def test_document(self):
+        word = Word("test")
+        word.setTF(0.4)
+        word.setIDF(0.6)
         doc = Document("hello my name is")
         self.assertEqual(doc.getDocString(), "hello my name is")
-        doc.addIncWord("hello", 5)
-        self.assertEqual(doc.getWordDict().get("hello"), 5)
-        doc.addIncWord("hello", 5)
-        self.assertEqual(doc.getWordDict().get("hello"), 10)
-        doc.addIncWord("test", 99)
-        self.assertEqual(len(doc.getWordDict()), 2)
-        self.assertEqual(doc.getWordDict().get("test"), 99)
+        doc.addRealWord(word)
+        self.assertEqual(doc.getWordDict().get("test").getName(), "test")
+        #doc.addIncWord("test", 99)
+        #self.assertEqual(len(doc.getWordDict()), 2)
+        #self.assertEqual(doc.getWordDict().get("test"), 99)
         self.assertTrue(doc.hasWord("test"))
 
     def test_docWords(self):
@@ -91,13 +92,14 @@ class TestMuchOAuthenticator(unittest.TestCase):
         TfIdf2 = docWords.calcTfIdf("nice", "happy", doc2)
         docWords.addDoc(doc2)
         self.assertEqual(len(docWords.getDocQueue()), 2)
-        self.assertEqual(len(docWords.getWordDict()), 2)
+#        self.assertEqual(len(docWords.getWordDict()), 2)
         TfIdf3 = docWords.calcTfIdf("nice", "happy", doc2)
-        self.assertEqual(len(docWords.getWordDict()), 2)
+        self.assertEqual(len(docWords.getDocQueue()), 2)
+#        self.assertEqual(len(docWords.getWordDict()), 2)
         for doc in docWords.getDocQueue():
             print 'doc: {}'.format(doc.getDocString())
             for k, v in doc.getWordDict().iteritems():
-                print 'worddict: {} {}'.format(k, v)
+                print 'worddict: {} {}'.format(k, v.getWeight())
 
 if __name__ == '__main__':
     unittest.main()

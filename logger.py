@@ -29,6 +29,7 @@ class Logger(object):
         self.time = self.util.currentTimeSeconds()
 
         self.timeLogger = csv.writer(open("timing.csv", 'a'))
+        self.timeLogger.writerow(['impl', 'exeTIme'])
         
     def logMessage(self, code, message):
         self.time = self.util.currentTimeMillis()

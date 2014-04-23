@@ -9,21 +9,13 @@ class DocWords(object):
     """An object that stores a duque of Documents and list of Words and calculates the TF/IDF"""
     def __init__(self, maxWindow):
         self.docs = deque('', maxWindow)
-        self.words = dict()
 
     def getDocQueue(self):
         return self.docs
 
-    def getWordDict(self):
-        return self.words
-
     " Adds a document to the right side of the deque, pushing off the left if maxWindow is exceeded. "
     def addDoc(self, doc):
         self.docs.append(doc)
-
-    " Adds a word to our real words list, replacing the old if it exists "
-    def addRealWord(self, word):
-        self.words[word.getName()] = word
 
     # Calculates the TF of a word, adds the count of the word to the doc, and stores it in our deque.
     # It then uses the current deque state to calculate IDF, returning the weight.
@@ -39,7 +31,7 @@ class DocWords(object):
         if(thisWordCount > 0):
             print 'FOUND {} {} words'.format(thisWordCount, emotion)
         # Store the count in the document
-        document.addIncWord(word, thisWordCount)
+        # TODO document.addIncWord(word, thisWordCount)
         # Calc the TF
         TF = round(thisWordCount / float(allWordCount), PRECISION)
         if(thisWordCount > 0):
@@ -67,5 +59,5 @@ class DocWords(object):
         realWord.setIDF(IDF)
         realWord.setWeight(TfIdf)
         realWord.setEmo(emotion)
-        self.addRealWord(realWord)
+        document.addRealWord(realWord)
         return document

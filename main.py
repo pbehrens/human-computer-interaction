@@ -38,13 +38,9 @@ def searchEvent():
         tfIdf = docWords.calcTfIdf(word, 'angry', document)
     for word in wordDict.getProfane():
         tfIdf = docWords.calcTfIdf(word, 'profane', document)
-    wordList = docWords.getWordDict()
-    for k, w in wordList.iteritems():
-        print 'word: {} {} {}'.format(w.getName(), w.getWeight(), w.getEmo())
-
     # Add the document to our deque
     docWords.addDoc(document)
-    tweetprocessor.processWeights(wordList)
+    tweetprocessor.processWeights(docWords)#wordList)
     logger.logTiming("tfIdf", (time.time() - start_time))
 
     countAndColor()

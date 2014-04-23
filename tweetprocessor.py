@@ -18,17 +18,18 @@ class TweetProcessor(object):
         self.counts['angryEm'] += tweet.angryEmoticonCount
         self.counts['sadEm'] += tweet.sadEmoticonCount
 
-    def processWeights(self, realWordList):
-        for w, rWord in realWordList.iteritems():
-            print 'WORD WEIGHT AFTER: {}'.format(rWord.getWeight())
-            if(rWord.getEmo() == "happy"):
-                self.counts['happy'] += rWord.getWeight()
-            if(rWord.getEmo() == "angry"):
-                self.counts['angry'] += rWord.getWeight()
-            if(rWord.getEmo() == "sad"):
-                self.counts['sad'] += rWord.getWeight()
-            if(rWord.getEmo() == "profane"):
-                self.counts['profane'] += rWord.getWeight()
+    def processWeights(self, docWords):#realWordList):
+        for doc in docWords.getDocQueue():
+            for w, rWord in doc.getWordDict().iteritems():
+                print 'WORD WEIGHT AFTER: {}'.format(rWord.getWeight())
+                if(rWord.getEmo() == "happy"):
+                    self.counts['happy'] += rWord.getWeight()
+                if(rWord.getEmo() == "angry"):
+                    self.counts['angry'] += rWord.getWeight()
+                if(rWord.getEmo() == "sad"):
+                    self.counts['sad'] += rWord.getWeight()
+                if(rWord.getEmo() == "profane"):
+                    self.counts['profane'] += rWord.getWeight()
 
     def calcHighest(self):
         highest = max(self.counts.iterkeys(), key=(lambda key: self.counts[key]))

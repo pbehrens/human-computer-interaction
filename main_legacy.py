@@ -39,7 +39,7 @@ def countAndColor():
     elif (highest == 'profane'):
         gui.setColor('orange')
     # Do process again after 15 sec
-    _job = gui.after(15000, searchEvent)
+    _job = gui.after(5000, searchEvent)
 
 def quitCallback():
     print "Exited."
