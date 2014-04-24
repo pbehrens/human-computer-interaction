@@ -5,7 +5,7 @@ import re
 
 PRECISION = 5
 
-class DocWords(object):
+class DocQueue(object):
     """An object that stores a duque of Documents and list of Words and calculates the TF/IDF"""
     def __init__(self, maxWindow):
         self.docs = deque('', maxWindow)

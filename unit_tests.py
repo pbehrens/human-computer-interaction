@@ -7,7 +7,7 @@ from worddictionary import WordDictionary
 from gui import Gui
 from word import Word
 from document import Document
-from doc_words import DocWords
+from doc_queue import DocQueue
 
 # Place holder function for gui init
 def placeHolder():
@@ -77,13 +77,10 @@ class TestMuchOAuthenticator(unittest.TestCase):
         self.assertEqual(doc.getDocString(), "hello my name is")
         doc.addRealWord(word)
         self.assertEqual(doc.getWordDict().get("test").getName(), "test")
-        #doc.addIncWord("test", 99)
-        #self.assertEqual(len(doc.getWordDict()), 2)
-        #self.assertEqual(doc.getWordDict().get("test"), 99)
         self.assertTrue(doc.hasWord("test"))
 
     def test_docWords(self):
-        docWords = DocWords(3)
+        docWords = DocQueue(3)
         doc1 = Document("hello my hello name is what what")
         doc2 = Document("test test nice nice okay")
         TfIdf1 = docWords.calcTfIdf("hello", "happy", doc1)
@@ -92,10 +89,8 @@ class TestMuchOAuthenticator(unittest.TestCase):
         TfIdf2 = docWords.calcTfIdf("nice", "happy", doc2)
         docWords.addDoc(doc2)
         self.assertEqual(len(docWords.getDocQueue()), 2)
-#        self.assertEqual(len(docWords.getWordDict()), 2)
         TfIdf3 = docWords.calcTfIdf("nice", "happy", doc2)
         self.assertEqual(len(docWords.getDocQueue()), 2)
-#        self.assertEqual(len(docWords.getWordDict()), 2)
         for doc in docWords.getDocQueue():
             print 'doc: {}'.format(doc.getDocString())
             for k, v in doc.getWordDict().iteritems():

@@ -3,7 +3,7 @@ from logger import Logger
 from tweet import Tweet
 from tweetprocessor import TweetProcessor
 from gui import Gui
-from doc_words import DocWords
+from doc_queue import DocQueue
 from document import Document
 from worddictionary import WordDictionary
 import time
@@ -15,7 +15,7 @@ logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
 gui = None
-docWords = DocWords(5)
+docWords = DocQueue(5)
 wordDict = WordDictionary()
 
 def searchEvent():
