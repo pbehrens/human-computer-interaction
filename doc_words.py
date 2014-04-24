@@ -30,8 +30,6 @@ class DocWords(object):
         thisWordCount = allWords.count(word)
         if(thisWordCount > 0):
             print 'FOUND {} {} words'.format(thisWordCount, emotion)
-        # Store the count in the document
-        # TODO document.addIncWord(word, thisWordCount)
         # Calc the TF
         TF = round(thisWordCount / float(allWordCount), PRECISION)
         if(thisWordCount > 0):
@@ -50,7 +48,7 @@ class DocWords(object):
             IDF = round((len(self.docs) + 1) / float(docsWithWord), PRECISION)
         if(thisWordCount > 0):
             print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
-        # TODO
+        # Calc the TfIdf
         TfIdf = round(TF * IDF, PRECISION)
         if(thisWordCount > 0):
             print 'WEIGHT: {}'.format(TfIdf)

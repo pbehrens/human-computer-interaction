@@ -8,6 +8,9 @@ from document import Document
 from worddictionary import WordDictionary
 import time
 
+SEARCH_TERM = 'Chicago'
+QUERY_FREQ = 5000
+
 logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
@@ -16,16 +19,13 @@ docWords = DocWords(5)
 wordDict = WordDictionary()
 
 def searchEvent():
-    results = api.GetSearch("Chicago", lang="en")
+    results = api.GetSearch(SEARCH_TERM, lang="en")
 
     start_time = time.time()
     resultString = ""
     for result in results:
         logger.logTweet(result)
         resultString+= ' ' + result.text
-        #tweet = Tweet(result.text)
-        #tweet.readTweet()
-        #tweetprocessor.processTweet(tweet)
     resultString.lower()
     print resultString
     document = Document(resultString)
@@ -60,7 +60,7 @@ def countAndColor():
     elif (highest == 'profane'):
         gui.setColor('orange')
     # Do process again after 15 sec
-    _job = gui.after(5000, searchEvent)
+    _job = gui.after(QUERY_FREQ, searchEvent)
 
 def quitCallback():
     print "Exited."
@@ -68,5 +68,5 @@ def quitCallback():
 
 if __name__ == '__main__':
     gui = Gui(quitCallback)
-    _job = gui.after(5000, searchEvent)
+    _job = gui.after(QUERY_FREQ, searchEvent)
     gui.mainloop()

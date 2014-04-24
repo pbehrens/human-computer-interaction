@@ -5,6 +5,9 @@ from tweetprocessor import TweetProcessor
 from gui import Gui
 import time
 
+SEARCH_TERM = 'Chicago'
+QUERY_FREQ = 5000
+
 logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
@@ -12,7 +15,7 @@ gui = None
 start_time = 0.0
 
 def searchEvent():
-    results = api.GetSearch("Chicago", lang="en")
+    results = api.GetSearch(SEARCH_TERM, lang="en")
 
     # Log tweets outside of timer
     for result in results:
@@ -41,7 +44,7 @@ def countAndColor():
     elif (highest == 'profane'):
         gui.setColor('orange')
     # Do process again after 15 sec
-    _job = gui.after(5000, searchEvent)
+    _job = gui.after(QUERY_FREQ, searchEvent)
 
 def quitCallback():
     print "Exited."
@@ -49,5 +52,5 @@ def quitCallback():
 
 if __name__ == '__main__':
     gui = Gui(quitCallback)
-    _job = gui.after(5000, searchEvent)
+    _job = gui.after(QUERY_FREQ, searchEvent)
     gui.mainloop()
