@@ -8,9 +8,9 @@ from document import Document
 from worddictionary import WordDictionary
 import time
 
-SEARCH_TERM = 'Chicago'
 QUERY_FREQ = 5000
 
+SEARCH_TERM = "Chicago"
 logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
@@ -19,6 +19,8 @@ docWords = DocQueue(5)
 wordDict = WordDictionary()
 
 def searchEvent():
+
+    # SEARCH_TERM = gui.getString()
     results = api.GetSearch(SEARCH_TERM, lang="en")
 
     start_time = time.time()
