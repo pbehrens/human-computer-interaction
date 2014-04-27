@@ -1,11 +1,10 @@
 import twitteroauth
-from logger import Logger
-from tweet import Tweet
-from tweetprocessor import TweetProcessor
-from gui import Gui
-from doc_queue import DocQueue
-from document import Document
-from worddictionary import WordDictionary
+from muchtwitter.tweets import tweet, tweetprocessor
+from muchtwitter.tweets import tweetprocessor
+from muchtwitter.output import gui
+from muchtwitter.data import docqueue
+from muchtwitter.data import document
+from muchtwitter.data import worddictionary
 import time
 
 QUERY_FREQ = 5000
