@@ -22,7 +22,7 @@ wordDict = WordDictionary()
 def searchEvent():
 
     SEARCH_TERM = get_string()
-
+    print SEARCH_TERM
     if SEARCH_TERM != "":
         results = api.GetSearch(SEARCH_TERM, lang="en")
 
@@ -76,6 +76,6 @@ def get_string():
     return search_text
 
 if __name__ == '__main__':
-    gui = Gui(quitCallback)
+    gui = Gui(quitCallback,get_string)
     _job = gui.after(QUERY_FREQ, searchEvent)
     gui.mainloop()

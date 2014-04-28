@@ -4,7 +4,6 @@
     <list default="true" id="932b4ab5-a6ed-449a-bc86-2aa5d012ff05" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui.py" afterPath="$PROJECT_DIR$/gui.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="human-computer-interaction.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="30" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0" vertical-offset="860" max-vertical-offset="1566">
+            <state line="41" column="40" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.82152975" vertical-offset="158" max-vertical-offset="1566">
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -38,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gui.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="gui.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="77" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.7450425" vertical-offset="230" max-vertical-offset="1098">
+            <state line="35" column="37" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="1098">
               <folding>
                 <element signature="e#95#115#0" expanded="true" />
               </folding>
@@ -62,8 +61,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/gui.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -291,7 +290,9 @@
       <module name="human-computer-interaction" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -601,20 +602,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="30" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0" vertical-offset="536" max-vertical-offset="1566">
+        <state line="35" column="37" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="1098">
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#95#115#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="77" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.7450425" vertical-offset="230" max-vertical-offset="1098">
+        <state line="41" column="40" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.82152975" vertical-offset="158" max-vertical-offset="1566">
           <folding>
-            <element signature="e#95#115#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
