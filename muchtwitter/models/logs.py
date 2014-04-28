@@ -2,15 +2,12 @@
 # encoding: utf-8
 
 
-import time
 from threading import Thread # This is the right package name
-import threading
 import ctypes
 from utils import Utility
 import csv
 import codecs
 import string
-
 import random
 import time
 import datetime
@@ -48,9 +45,10 @@ class Logger(object):
         cleanText = filter(lambda x: x in string.printable, tweetText)
         exclude = set([',', ';'])
         cleanText = ''.join(ch for ch in cleanText if ch not in exclude)
-        
-        self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
+        self.messageLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
 
     def logTiming(self, qualifier, execTime, highestEmo):
         self.time = self.util.currentTimeMillis()
         self.timeLogger.writerow([qualifier, execTime, highestEmo, self.time])
+        
+    def logCounts(counts)
