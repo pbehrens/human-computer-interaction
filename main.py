@@ -10,7 +10,7 @@ import time
 
 QUERY_FREQ = 5000
 
-SEARCH_TERM = "Chicago"
+# SEARCH_TERM = "Chicago"
 logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
@@ -18,34 +18,37 @@ gui = None
 docWords = DocQueue(5)
 wordDict = WordDictionary()
 
+
 def searchEvent():
 
-    # SEARCH_TERM = gui.getString()
-    results = api.GetSearch(SEARCH_TERM, lang="en")
+    SEARCH_TERM = get_string()
 
-    start_time = time.time()
-    resultString = ""
-    for result in results:
-        logger.logTweet(result)
-        resultString+= ' ' + result.text
-    resultString.lower()
-    print resultString
-    document = Document(resultString)
-    # Go through each word list
-    for word in wordDict.getHappy():
-        tfIdf = docWords.calcTfIdf(word, 'happy', document)
-    for word in wordDict.getSad():
-        tfIdf = docWords.calcTfIdf(word, 'sad', document)
-    for word in wordDict.getAngry():
-        tfIdf = docWords.calcTfIdf(word, 'angry', document)
-    for word in wordDict.getProfane():
-        tfIdf = docWords.calcTfIdf(word, 'profane', document)
-    # Add the document to our deque
-    docWords.addDoc(document)
-    tweetprocessor.processWeights(docWords)#wordList)
-    logger.logTiming("tfIdf", (time.time() - start_time), tweetprocessor.calcHighest())
+    if SEARCH_TERM != "":
+        results = api.GetSearch(SEARCH_TERM, lang="en")
 
-    countAndColor()
+        start_time = time.time()
+        resultString = ""
+        for result in results:
+            logger.logTweet(result)
+            resultString+= ' ' + result.text
+        resultString.lower()
+        print resultString
+        document = Document(resultString)
+        # Go through each word list
+        for word in wordDict.getHappy():
+            tfIdf = docWords.calcTfIdf(word, 'happy', document)
+        for word in wordDict.getSad():
+            tfIdf = docWords.calcTfIdf(word, 'sad', document)
+        for word in wordDict.getAngry():
+            tfIdf = docWords.calcTfIdf(word, 'angry', document)
+        for word in wordDict.getProfane():
+            tfIdf = docWords.calcTfIdf(word, 'profane', document)
+        # Add the document to our deque
+        docWords.addDoc(document)
+        tweetprocessor.processWeights(docWords)#wordList)
+        logger.logTiming("tfIdf", (time.time() - start_time), tweetprocessor.calcHighest())
+
+        countAndColor()
 
 def countAndColor():
     highest = tweetprocessor.calcHighest()
@@ -67,6 +70,10 @@ def countAndColor():
 def quitCallback():
     print "Exited."
     gui.stopGui()
+
+def get_string():
+    search_text = gui.search.get()
+    return search_text
 
 if __name__ == '__main__':
     gui = Gui(quitCallback)

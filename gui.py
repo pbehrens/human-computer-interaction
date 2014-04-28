@@ -11,6 +11,7 @@ import Tkinter as tk
 import sys
 # from main import searchEvent
 
+searchText = "hello"
 
 class Gui(tk.Frame):
     def __init__(self, quitCallback, master=None):
@@ -25,26 +26,29 @@ class Gui(tk.Frame):
         self.pack(fill="both", expand=True, ipadx=100, ipady=100)
         self.createWidgets()
 
+
     def stopGui(self):
         self.destroy()
         sys.exit(0)
 
     def createWidgets(self):
         #TODO text box for search query text
-        # frame.pack()
-        self.textBox = tk.Text(self, height=1, width=20)
-        self.textBox.grid()
-        self.enterButton = tk.Button(self, text='Enter', command=self.quitCallback)
-        self.enterButton.grid()
+
+        self.search = tk.Entry(self)
+        self.search.grid()
+
+        self.submit_button = tk.Button(self, text="Submit", command=self.get_string)
+        self.submit_button.grid
+
         b = self.quitButton = tk.Button(self, text='Quit', command=self.quitCallback)
         self.quitButton.grid()
+
 
     def setColor(self, color):
         self.color = color
         self.configure(background=self.color)
 
-    def getString(self):
-        return self.textBox.get("0.0",'END-1c')
+
 
 """ Example execution """
 #app = Gui()
