@@ -2,8 +2,9 @@ from document import Document
 from word import Word
 from collections import deque
 import re
+import math
 
-PRECISION = 5
+PRECISION = 8
 
 class DocQueue(object):
     """An object that stores a duque of Documents and list of Words and calculates the TF/IDF"""
@@ -45,7 +46,7 @@ class DocQueue(object):
         if(docsWithWord == 0):
             IDF = 0.0
         else:
-            IDF = round((len(self.docs) + 1) / float(docsWithWord), PRECISION)
+            IDF = abs((len(self.docs) + 1) / (docsWithWord))
         if(thisWordCount > 0):
             print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
         # Calc the TfIdf
