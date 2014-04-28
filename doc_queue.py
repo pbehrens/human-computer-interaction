@@ -37,8 +37,6 @@ class DocQueue(object):
             print 'TF CALC: {} / {} = {}'.format(thisWordCount, allWordCount, TF)
         # Calc the IDF
         docsWithWord = 0
-        if(thisWordCount > 0):
-            docsWithWord = 1
         for doc in self.docs:
             if(doc.hasWord(word)):
                 docsWithWord += 1
@@ -46,7 +44,7 @@ class DocQueue(object):
         if(docsWithWord == 0):
             IDF = 0.0
         else:
-            IDF = abs(math.log(len(self.docs) + 1) / (docsWithWord))
+            IDF = math.log((len(self.docs) + 1) / float(docsWithWord))
         if(thisWordCount > 0):
             print 'IDF CALC: {} / {} = {}'.format(len(self.docs), docsWithWord, IDF)
         # Calc the TfIdf
