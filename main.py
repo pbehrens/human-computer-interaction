@@ -12,7 +12,7 @@ logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
 gui = None
-docWords = DocQueue(5)
+docWords = DocQueue(10)
 wordDict = WordDictionary()
 
 
@@ -29,7 +29,7 @@ def searchEvent():
             logger.logTweet(result)
             resultString+= ' ' + result.text
         resultString.lower()
-        print resultString
+        print resultString.encode('utf-8')
         document = Document(resultString)
         # Go through each word list
         for word in wordDict.getHappy():
