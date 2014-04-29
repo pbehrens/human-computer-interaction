@@ -20,7 +20,7 @@ def searchEvent():
 
     SEARCH_TERM = get_string()
     print SEARCH_TERM
-    if SEARCH_TERM != "":
+    if len(SEARCH_TERM) > 0:
         results = api.GetSearch(SEARCH_TERM, lang="en")
 
         start_time = time.time()
@@ -52,7 +52,7 @@ def countAndColor():
     print '\n\n Highest emotion: ' + highest + '\n\n'
     print 'Accumulated so far: '
     print tweetprocessor.counts
-    logger.logCounts(tweetprocessor.counts)
+    # logger.logCounts(tweetprocessor.counts)
     
     print '\n\n'
     if (highest == 'happy'):
@@ -72,7 +72,10 @@ def quitCallback():
 
 def get_string():
     search_text = gui.search.get()
-    return search_text
+    if len(search_text) > 0 or search_text is not Nil:
+        return search_text
+    else:
+        return Nil
 
 if __name__ == '__main__':
     gui = Gui(quitCallback,get_string)

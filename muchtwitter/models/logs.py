@@ -51,4 +51,3 @@ class Logger(object):
         self.time = self.util.currentTimeMillis()
         self.timeLogger.writerow([qualifier, execTime, highestEmo, self.time])
         
-    def logCounts(counts)
