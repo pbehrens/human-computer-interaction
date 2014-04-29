@@ -1,11 +1,8 @@
 import twitteroauth
-from logger import Logger
-from tweet import Tweet
-from tweetprocessor import TweetProcessor
+from muchtwitter.models.twitter import TweetProcessor
 from gui import Gui
-from doc_queue import DocQueue
-from document import Document
-from worddictionary import WordDictionary
+from muchtwitter.models.logs import Logger
+from muchtwitter.models.document import Document, DocQueue, WordDictionary
 import time
 
 QUERY_FREQ = 5000
@@ -55,6 +52,8 @@ def countAndColor():
     print '\n\n Highest emotion: ' + highest + '\n\n'
     print 'Accumulated so far: '
     print tweetprocessor.counts
+    logger.logCounts(tweetprocessor.counts)
+    
     print '\n\n'
     if (highest == 'happy'):
         gui.setColor('green')

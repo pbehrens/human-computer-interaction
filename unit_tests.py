@@ -3,11 +3,9 @@ import twitter
 import twitteroauth
 import sys
 from outputcontroller import OutputController
-from worddictionary import WordDictionary
+from muchtwitter.models.document import Word, WordDictionary, Document, DocQueue
+from muchtwitter.models.logs import Logger
 from gui import Gui
-from word import Word
-from document import Document
-from doc_queue import DocQueue
 
 # Place holder function for gui init
 def placeHolder():
