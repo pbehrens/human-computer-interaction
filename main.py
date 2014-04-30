@@ -1,11 +1,8 @@
 import twitteroauth
-from logger import Logger
-from tweet import Tweet
-from tweetprocessor import TweetProcessor
+from muchtwitter.models.twitter import TweetProcessor
 from gui import Gui
-from doc_queue import DocQueue
-from document import Document
-from worddictionary import WordDictionary
+from muchtwitter.models.logs import Logger
+from muchtwitter.models.document import Document, DocQueue, WordDictionary
 import time
 
 QUERY_FREQ = 5000
@@ -15,15 +12,14 @@ logger = Logger()
 api = twitteroauth.getAuthenticatedApi()
 tweetprocessor = TweetProcessor()
 gui = None
-docWords = DocQueue(5)
+docWords = DocQueue(10)
 wordDict = WordDictionary()
-
 
 def searchEvent():
 
     SEARCH_TERM = get_string()
     print SEARCH_TERM
-    if SEARCH_TERM != "":
+    if len(SEARCH_TERM) > 0:
         results = api.GetSearch(SEARCH_TERM, lang="en")
 
         start_time = time.time()
@@ -32,7 +28,7 @@ def searchEvent():
             logger.logTweet(result)
             resultString+= ' ' + result.text
         resultString.lower()
-        print resultString
+        print resultString.encode('utf-8')
         document = Document(resultString)
         # Go through each word list
         for word in wordDict.getHappy():
@@ -55,6 +51,8 @@ def countAndColor():
     print '\n\n Highest emotion: ' + highest + '\n\n'
     print 'Accumulated so far: '
     print tweetprocessor.counts
+    # logger.logCounts(tweetprocessor.counts)
+    
     print '\n\n'
     if (highest == 'happy'):
         gui.setColor('green')
@@ -73,7 +71,8 @@ def quitCallback():
 
 def get_string():
     search_text = gui.search.get()
-    return search_text
+    if len(search_text) > 0:
+        return search_text
 
 if __name__ == '__main__':
     gui = Gui(quitCallback,get_string)

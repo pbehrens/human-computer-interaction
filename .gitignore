@@ -8,3 +8,6 @@ env/*
 *.swp
 tweets.csv
 *.csv
+.idea/*
+.idea/workspace.xml
+

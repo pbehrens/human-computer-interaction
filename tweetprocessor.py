@@ -22,7 +22,7 @@ class TweetProcessor(object):
         self.clearCounts()
         for doc in docWords.getDocQueue():
             for w, rWord in doc.getWordDict().iteritems():
-                print 'WORD WEIGHT AFTER: {}'.format(rWord.getWeight())
+                #print 'WORD WEIGHT AFTER: {}'.format(rWord.getWeight())
                 if(rWord.getEmo() == "happy"):
                     self.counts['happy'] += rWord.getWeight()
                 if(rWord.getEmo() == "angry"):

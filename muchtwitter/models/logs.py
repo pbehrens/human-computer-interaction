@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-"""
-phlogs.py
 
-Created by Patrick Andre Behrens on 2013-10-15.
-Copyright (c) 2013 __RamaLabsLLC__. All rights reserved.
-"""
-import time
 from threading import Thread # This is the right package name
-import threading
 import ctypes
 from utils import Utility
 import csv
 import codecs
 import string
+import random
+import time
+import datetime
+import threading
+import sys, os
+
+
 
 class Logger(object):
     "Class for logging tweet data"
@@ -45,9 +45,9 @@ class Logger(object):
         cleanText = filter(lambda x: x in string.printable, tweetText)
         exclude = set([',', ';'])
         cleanText = ''.join(ch for ch in cleanText if ch not in exclude)
-        
-        self.tweetLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
+        self.messageLogger.writerow([self.util.currentTimeSeconds(), tweet.created_at, cleanText, tweet.lang, tweet.location])
 
     def logTiming(self, qualifier, execTime, highestEmo):
         self.time = self.util.currentTimeMillis()
         self.timeLogger.writerow([qualifier, execTime, highestEmo, self.time])
+        
